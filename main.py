@@ -4,14 +4,23 @@ import numpy as np
 from time import sleep, strftime
 import os
 import shutil
+import sys
 
 timeList = []
 x = 0
 
 folder = 'images'
+
 if os.path.exists(folder):
-    shutil.rmtree(folder, ignore_errors=False, onerror=None)
-os.makedirs(folder)
+    choice_delete = input('do you want to delete the folder and continue? (yes or no): ')
+    if choice_delete == 'yes':
+        print('ok! deleting the folder...')
+        shutil.rmtree(folder, ignore_errors=False, onerror=None)
+        os.makedirs(folder)
+        print('program starting!')
+    if choice_delete == 'no':
+        print('ok! stopping now.')
+        sys.exit()
 
 def getTime():
     try:
@@ -35,12 +44,10 @@ while True:
         ypoints = np.array(timeList)
         x = x + 1
         plt.plot(ypoints, color='black')
-        
-        # Adiciona o horário no topo superior direito
         current_time = strftime("%H:%M:%S")
         plt.text(0.95, 0.95, current_time, transform=plt.gca().transAxes,
                  fontsize=12, verticalalignment='top', horizontalalignment='right')
         
         plt.savefig(f'{folder}/graph_{x}.png')
-        plt.clf()  # Limpa a figura para o próximo loop
+        plt.clf()
     sleep(30)
