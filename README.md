@@ -6,6 +6,7 @@
 ## como rodar
 
 baixe o repositório e execute o main.py
+
 ele começará a gerar imagens do gráfico do timer e jogar na pasta 'images'
 
 ![](/imgs/img2.png)
